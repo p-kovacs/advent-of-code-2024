@@ -19,7 +19,7 @@ public class SolutionsTest {
 
     private static Stream<Arguments> test() {
         return Stream.of(
-                new Arguments("Day01", Day01::main, "0", "0"),
+                new Arguments("Day01", Day01::main, "1388114", "23529853"),
                 new Arguments("Day02", Day02::main, "0", "0"),
                 new Arguments("Day03", Day03::main, "0", "0"),
                 new Arguments("Day04", Day04::main, "0", "0"),
