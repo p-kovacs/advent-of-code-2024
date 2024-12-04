@@ -21,7 +21,7 @@ public class SolutionsTest {
         return Stream.of(
                 new Arguments("Day01", Day01::main, "1388114", "23529853"),
                 new Arguments("Day02", Day02::main, "220", "296"),
-                new Arguments("Day03", Day03::main, "0", "0"),
+                new Arguments("Day03", Day03::main, "173529487", "99532691"),
                 new Arguments("Day04", Day04::main, "0", "0"),
                 new Arguments("Day05", Day05::main, "0", "0"),
                 new Arguments("Day06", Day06::main, "0", "0"),

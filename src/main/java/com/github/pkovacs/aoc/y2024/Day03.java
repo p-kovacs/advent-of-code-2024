@@ -1,23 +1,34 @@
 package com.github.pkovacs.aoc.y2024;
 
 import com.github.pkovacs.aoc.AbstractDay;
+import com.github.pkovacs.util.RegexUtils;
 
 public class Day03 extends AbstractDay {
 
-    private static final String EXAMPLE = """
-            TODO
-            """;
-
     public static void main(String[] args) {
-        var lines =
-                EXAMPLE.lines().toList();
-//                readLines(getInputPath());
+        var input = readString(getInputPath());
 
-        
+        var instructions = RegexUtils.findAll("(mul[(][0-9]{1,3},[0-9]{1,3}[)]|do[(][)]|don't[(][)])", input);
 
-        System.out.println();
-//        System.out.println("Part 1: " + solve(lines, 1));
-//        System.out.println("Part 2: " + solve(lines, 2));
+        long ans1 = 0;
+        long ans2 = 0;
+        boolean enabled = true;
+        for (var instruction : instructions) {
+            switch (instruction) {
+                case "do()" -> enabled = true;
+                case "don't()" -> enabled = false;
+                default -> {
+                    long[] op = parseLongs(instruction);
+                    ans1 += op[0] * op[1];
+                    if (enabled) {
+                        ans2 += op[0] * op[1];
+                    }
+                }
+            }
+        }
+
+        System.out.println("Part 1: " + ans1);
+        System.out.println("Part 2: " + ans2);
     }
 
 }
