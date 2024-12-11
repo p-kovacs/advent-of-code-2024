@@ -29,7 +29,7 @@ public class SolutionsTest {
                 new Arguments("Day08", Day08::main, "367", "1285"),
                 new Arguments("Day09", Day09::main, "6301895872542", "6323761685944"),
                 new Arguments("Day10", Day10::main, "796", "1942"),
-                new Arguments("Day11", Day11::main, "0", "0"),
+                new Arguments("Day11", Day11::main, "183484", "218817038947400"),
                 new Arguments("Day12", Day12::main, "0", "0"),
                 new Arguments("Day13", Day13::main, "0", "0"),
                 new Arguments("Day14", Day14::main, "0", "0"),
@@ -78,7 +78,7 @@ public class SolutionsTest {
         if ("0".equals(expected) && output.isBlank()) {
             return;
         }
-        
+
         var parts = output.split(System.lineSeparator())[index].split(": ");
         var value = parts.length < 2 ? "" : parts[1].trim();
         Assertions.assertEquals(expected, value);
