@@ -2,7 +2,6 @@ package com.github.pkovacs.aoc.y2024;
 
 import java.util.Arrays;
 
-import com.github.pkovacs.aoc.AbstractDay;
 import com.github.pkovacs.util.data.CounterMap;
 
 public class Day11 extends AbstractDay {

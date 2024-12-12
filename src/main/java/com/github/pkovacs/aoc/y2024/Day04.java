@@ -2,7 +2,6 @@ package com.github.pkovacs.aoc.y2024;
 
 import java.util.List;
 
-import com.github.pkovacs.aoc.AbstractDay;
 import com.github.pkovacs.util.data.Cell;
 import com.github.pkovacs.util.data.CharTable;
 

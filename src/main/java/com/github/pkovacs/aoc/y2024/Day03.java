@@ -1,6 +1,5 @@
 package com.github.pkovacs.aoc.y2024;
 
-import com.github.pkovacs.aoc.AbstractDay;
 import com.github.pkovacs.util.RegexUtils;
 
 public class Day03 extends AbstractDay {

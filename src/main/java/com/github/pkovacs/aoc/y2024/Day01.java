@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.IntStream;
 
-import com.github.pkovacs.aoc.AbstractDay;
-
 public class Day01 extends AbstractDay {
 
     public static void main(String[] args) {

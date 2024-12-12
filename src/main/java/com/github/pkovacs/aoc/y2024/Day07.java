@@ -3,8 +3,6 @@ package com.github.pkovacs.aoc.y2024;
 import java.util.List;
 import java.util.stream.LongStream;
 
-import com.github.pkovacs.aoc.AbstractDay;
-
 public class Day07 extends AbstractDay {
 
     public static void main(String[] args) {

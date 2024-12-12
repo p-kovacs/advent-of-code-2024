@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-import com.github.pkovacs.aoc.AbstractDay;
 import com.github.pkovacs.util.data.Cell;
 import com.github.pkovacs.util.data.CharTable;
 import com.github.pkovacs.util.data.Direction;

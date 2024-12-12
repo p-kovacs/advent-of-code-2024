@@ -4,7 +4,6 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.pkovacs.aoc.AbstractDay;
 import com.github.pkovacs.util.data.Cell;
 import com.github.pkovacs.util.data.CharTable;
 

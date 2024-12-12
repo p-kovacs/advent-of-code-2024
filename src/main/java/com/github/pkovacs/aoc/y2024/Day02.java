@@ -2,7 +2,6 @@ package com.github.pkovacs.aoc.y2024;
 
 import java.util.stream.IntStream;
 
-import com.github.pkovacs.aoc.AbstractDay;
 import com.github.pkovacs.util.Utils;
 
 public class Day02 extends AbstractDay {

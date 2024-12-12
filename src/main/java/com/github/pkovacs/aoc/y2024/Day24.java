@@ -1,7 +1,5 @@
 package com.github.pkovacs.aoc.y2024;
 
-import com.github.pkovacs.aoc.AbstractDay;
-
 public class Day24 extends AbstractDay {
 
     private static final String EXAMPLE = """
@@ -12,8 +10,6 @@ public class Day24 extends AbstractDay {
         var lines =
                 EXAMPLE.lines().toList();
 //                readLines(getInputPath());
-
-        
 
         System.out.println();
 //        System.out.println("Part 1: " + solve(lines, 1));

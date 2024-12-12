@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.github.pkovacs.aoc.AbstractDay;
-
 import static java.util.stream.Collectors.toSet;
 
 public class Day05 extends AbstractDay {
