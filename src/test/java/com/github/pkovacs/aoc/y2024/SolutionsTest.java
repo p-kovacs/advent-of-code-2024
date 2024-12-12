@@ -31,19 +31,20 @@ public class SolutionsTest {
                 new Arguments("Day10", Day10::main, "796", "1942"),
                 new Arguments("Day11", Day11::main, "183484", "218817038947400"),
                 new Arguments("Day12", Day12::main, "1431316", "821428"),
-                new Arguments("Day13", Day13::main, "0", "0"),
-                new Arguments("Day14", Day14::main, "0", "0"),
-                new Arguments("Day15", Day15::main, "0", "0"),
-                new Arguments("Day16", Day16::main, "0", "0"),
-                new Arguments("Day17", Day17::main, "0", "0"),
-                new Arguments("Day18", Day18::main, "0", "0"),
-                new Arguments("Day19", Day19::main, "0", "0"),
-                new Arguments("Day20", Day20::main, "0", "0"),
-                new Arguments("Day21", Day21::main, "0", "0"),
-                new Arguments("Day22", Day22::main, "0", "0"),
-                new Arguments("Day23", Day23::main, "0", "0"),
-                new Arguments("Day24", Day24::main, "0", "0"),
-                new Arguments("Day25", Day25::main, "0", "0")
+//                new Arguments("Day13", Day13::main, "0", "0"),
+//                new Arguments("Day14", Day14::main, "0", "0"),
+//                new Arguments("Day15", Day15::main, "0", "0"),
+//                new Arguments("Day16", Day16::main, "0", "0"),
+//                new Arguments("Day17", Day17::main, "0", "0"),
+//                new Arguments("Day18", Day18::main, "0", "0"),
+//                new Arguments("Day19", Day19::main, "0", "0"),
+//                new Arguments("Day20", Day20::main, "0", "0"),
+//                new Arguments("Day21", Day21::main, "0", "0"),
+//                new Arguments("Day22", Day22::main, "0", "0"),
+//                new Arguments("Day23", Day23::main, "0", "0"),
+//                new Arguments("Day24", Day24::main, "0", "0"),
+//                new Arguments("Day25", Day25::main, "0", "0")
+                new Arguments("The End", (args) -> {}, "0", "0")
         );
     }
 
