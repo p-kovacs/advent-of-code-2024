@@ -25,13 +25,13 @@ public class Day17 extends AbstractDay {
     /**
      * Solves part 2 exploiting the particular behavior of the input program.
      * <p>
-     * The program turns out to be a loop (obviously). In each iteration, a number is printed based on the current
-     * value of register A, then the value of register A is divided by 8 (i.e., the last 3 bits are removed).
-     * The loop terminates when the value of register A becomes zero. Therefore, the last number of the output only
-     * depends on the first few bits (at most 3), and for each preceding number, 3 additional bits are required.
+     * The program is a simple loop. In each iteration, a number is printed based on the current value of register A,
+     * then this value is divided by 8 (i.e., the last 3 bits are removed). The loop terminates when the value of
+     * register A becomes zero. Therefore, the last number of the output only depends on the first few (at most 3)
+     * bits of the initial value of register A, and 3 additional bits are required for each preceding number.
      * <p>
      * Based on this, we collect the candidates for the initial value of register A for suffixes of increasing size
-     * of the actual program.
+     * of the expected output (the program code).
      */
     private static long solve2(List<Integer> prg) {
         var candidates = List.of(0L);
