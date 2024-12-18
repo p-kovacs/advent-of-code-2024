@@ -2,7 +2,6 @@ package com.github.pkovacs.aoc.y2024;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.IntStream;
 
 import com.github.pkovacs.util.alg.Bfs;
 import com.github.pkovacs.util.alg.Path;
@@ -12,15 +11,25 @@ public class Day18 extends AbstractDay {
 
     public static void main(String[] args) {
         var lines = readLines(getInputPath());
-
         var table = parseInput(lines);
-        long ans1 = dist(table, 1024).orElseThrow();
-        String ans2 = IntStream.range(1024, lines.size())
-                .filter(t -> dist(table, t + 1).isEmpty())
-                .mapToObj(lines::get).findFirst().orElseThrow();
 
-        System.out.println("Part 1: " + ans1);
-        System.out.println("Part 2: " + ans2);
+        System.out.println("Part 1: " + dist(table, 1024).orElseThrow());
+        System.out.println("Part 2: " + solve2(lines, table));
+    }
+
+    /** Solves part 2. Binary search is used to make it faster. */
+    private static String solve2(List<String> lines, IntTable table) {
+        int low = 1024;
+        int high = lines.size() - 1;
+        while (low < high) {
+            int mid = (low + high) / 2;
+            if (dist(table, mid + 1).isEmpty()) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return lines.get(low);
     }
 
     private static Optional<Long> dist(IntTable table, int time) {
