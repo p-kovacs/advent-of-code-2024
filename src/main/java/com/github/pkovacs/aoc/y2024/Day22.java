@@ -1,6 +1,7 @@
 package com.github.pkovacs.aoc.y2024;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class Day22 extends AbstractDay {
 
@@ -14,14 +15,18 @@ public class Day22 extends AbstractDay {
     public static void main(String[] args) {
         var seeds = readInts(getInputPath());
 
-        System.out.println("Part 1: " + Arrays.stream(seeds).mapToLong(Day22::iterate).sum());
+        System.out.println("Part 1: " + solve1(seeds));
         System.out.println("Part 2: " + solve2(seeds));
+    }
+
+    private static long solve1(int[] seeds) {
+        return Arrays.stream(seeds).mapToLong(seed -> next(seed, COUNT)).sum();
     }
 
     private static int solve2(int[] seeds) {
         int[] counter = new int[RADIX4];
         for (var seed : seeds) {
-            var prices = prices(seed);
+            var prices = IntStream.iterate(seed, Day22::next).map(i -> i % 10).limit(COUNT + 1).toArray();
             int diff = 0;
             var found = new boolean[RADIX4];
             for (int i = 1; i < prices.length; i++) {
@@ -36,21 +41,11 @@ public class Day22 extends AbstractDay {
         return Arrays.stream(counter).max().orElseThrow();
     }
 
-    private static int iterate(int s) {
-        for (int i = 0; i < COUNT; i++) {
+    private static int next(int s, int count) {
+        for (int i = 0; i < count; i++) {
             s = next(s);
         }
         return s;
-    }
-
-    private static int[] prices(int s) {
-        int[] a = new int[COUNT + 1];
-        a[0] = s % 10;
-        for (int i = 1; i < a.length; i++) {
-            s = next(s);
-            a[i] = s % 10;
-        }
-        return a;
     }
 
     private static int next(int s) {
