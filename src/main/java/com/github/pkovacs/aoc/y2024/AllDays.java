@@ -34,7 +34,7 @@ public class AllDays {
             new Day("Day 20", Day20::main, "1530", "1033983"),
             new Day("Day 21", Day21::main, "206798", "251508572750680"),
             new Day("Day 22", Day22::main, "14119253575", "1600"),
-//                new Day("Day 23", Day23::main, "0", "0"),
+            new Day("Day 23", Day23::main, "1302", "cb,df,fo,ho,kk,nw,ox,pq,rt,sf,tq,wi,xz"),
 //                new Day("Day 24", Day24::main, "0", "0"),
 //                new Day("Day 25", Day25::main, "0", "0")
             new Day("The End", null, null, null)
