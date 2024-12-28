@@ -36,8 +36,7 @@ public class AllDays {
             new Day("Day 22", Day22::main, "14119253575", "1600"),
             new Day("Day 23", Day23::main, "1302", "cb,df,fo,ho,kk,nw,ox,pq,rt,sf,tq,wi,xz"),
             new Day("Day 24", Day24::main, "38869984335432", "drg,gvw,jbp,jgc,qjb,z15,z22,z35"),
-//                new Day("Day 25", Day25::main, "0", "0")
-            new Day("The End", null, null, null)
+            new Day("Day 25", Day25::main, "3127", "0")
     );
 
     public static void main(String[] args) {
