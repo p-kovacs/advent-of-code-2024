@@ -16,14 +16,18 @@ fi
 
 session=$(cat "session.txt")
 
-if [ $(TZ=EST date "+%Y") -eq $year ]; then
-    day=$(TZ=EST date "+%d")
+if [ $(TZ=EST date "+%Y") -eq $year ] && [ $(TZ=EST date "+%d") -leq 25 ]; then
+    max=$(TZ=EST date "+%d")
 else
-    day=25
+    max=25
 fi
 
-for d in $(seq 01 $day); do
-    file=$([ $d -lt 10 ] && echo "day0$d.txt" || echo "day$d.txt")
+for d in $(seq 1 $max); do
+    if [ $d -lt 10 ]; then
+        file="day0$d.txt"
+    else
+        file="day$d.txt"
+    fi
     if [ -f $file ]; then
         echo "$file: already exists"
     else
