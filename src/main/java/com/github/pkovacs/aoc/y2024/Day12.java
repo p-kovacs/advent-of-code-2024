@@ -6,10 +6,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.github.pkovacs.util.alg.Bfs;
-import com.github.pkovacs.util.data.Cell;
-import com.github.pkovacs.util.data.CharTable;
-import com.github.pkovacs.util.data.Direction;
+import com.github.pkovacs.util.Bfs;
+import com.github.pkovacs.util.CharTable;
+import com.github.pkovacs.util.Dir;
+import com.github.pkovacs.util.Graph;
+import com.github.pkovacs.util.Pos;
 
 public class Day12 extends AbstractDay {
 
@@ -18,14 +19,14 @@ public class Day12 extends AbstractDay {
 
         long ans1 = 0;
         long ans2 = 0;
-        var reached = new HashSet<Cell>();
-        for (var current : table.cells().toList()) {
+        var reached = new HashSet<Pos>();
+        for (var current : table.cellList()) {
             if (reached.contains(current)) {
                 continue;
             }
 
-            var region = Bfs.run(current,
-                    p -> table.neighbors(p).filter(q -> table.get(q) == table.get(p)).toList()).keySet();
+            var graph = table.graph().filterEdges((p, q) -> table.get(p) == table.get(q));
+            var region = Bfs.findPaths(graph, current).keySet();
             var sideSections = SideSection.collect(region);
 
             long perimeter = sideSections.size();
@@ -49,23 +50,23 @@ public class Day12 extends AbstractDay {
      * algorithm could be achieved if the side sections and sorted (and grouped) appropriately so that the relevant
      * neighbors get next to each other.
      */
-    private record SideSection(Cell inner, Cell outer) {
+    private record SideSection(Pos inner, Pos outer) {
 
-        static List<SideSection> collect(Set<Cell> region) {
+        static List<SideSection> collect(Set<Pos> region) {
             return region.stream().flatMap(p -> p.neighbors().filter(q -> !region.contains(q))
                     .map(q -> new SideSection(p, q))).toList();
         }
 
         long cornerCount(Collection<SideSection> sideSections) {
-            boolean horizontalSide = inner.x() == outer.x();
-            return Arrays.stream(Direction.values())
+            boolean horizontalSide = inner.x == outer.x;
+            return Arrays.stream(Dir.values())
                     .filter(dir -> dir.isHorizontal() == horizontalSide)
                     .map(this::neighbor)
                     .filter(n -> !sideSections.contains(n))
                     .count();
         }
 
-        SideSection neighbor(Direction dir) {
+        SideSection neighbor(Dir dir) {
             return new SideSection(inner.neighbor(dir), outer.neighbor(dir));
         }
 

@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import com.github.pkovacs.util.data.Point;
+import com.github.pkovacs.util.Pos;
 
 public class Day14 extends AbstractDay {
 
@@ -31,8 +31,8 @@ public class Day14 extends AbstractDay {
 
         long[] c = new long[4];
         for (var p : positions) {
-            if (p.x() != WIDTH / 2 && p.y() != HEIGHT / 2) {
-                int quadrant = (p.x() > WIDTH / 2 ? 1 : 0) + (p.y() > HEIGHT / 2 ? 2 : 0);
+            if (p.x != WIDTH / 2 && p.y != HEIGHT / 2) {
+                int quadrant = (p.x > WIDTH / 2 ? 1 : 0) + (p.y > HEIGHT / 2 ? 2 : 0);
                 c[quadrant]++;
             }
         }
@@ -51,20 +51,20 @@ public class Day14 extends AbstractDay {
      */
     private static boolean xmasTreeFound(List<Robot> robots, int time) {
         var positions = robots.stream().map(r -> r.getPos(time))
-                .sorted(Comparator.comparing(p -> p.y() * 1000 + p.x())).toList();
+                .sorted(Comparator.comparing(p -> p.y * 1000 + p.x)).toList();
         return IntStream.range(0, positions.size() - MIN_TREE_LINE_LENGTH).anyMatch(i ->
-                positions.get(i + MIN_TREE_LINE_LENGTH).equals(positions.get(i).add(MIN_TREE_LINE_LENGTH, 0)));
+                positions.get(i + MIN_TREE_LINE_LENGTH).equals(positions.get(i).plus(MIN_TREE_LINE_LENGTH, 0)));
     }
 
-    private record Robot(Point p, Point v) {
+    private record Robot(Pos p, Pos v) {
 
         static Robot parse(String line) {
             var c = parseInts(line);
-            return new Robot(new Point(c[0], c[1]), new Point(c[2], c[3]));
+            return new Robot(new Pos(c[0], c[1]), new Pos(c[2], c[3]));
         }
 
-        Point getPos(int time) {
-            return new Point(wrapIndex(p.x() + v.x() * time, WIDTH), wrapIndex(p.y() + v.y() * time, HEIGHT));
+        Pos getPos(int time) {
+            return new Pos(wrapIndex(p.x + v.x * time, WIDTH), wrapIndex(p.y + v.y * time, HEIGHT));
         }
 
     }

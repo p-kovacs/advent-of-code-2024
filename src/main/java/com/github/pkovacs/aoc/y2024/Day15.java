@@ -3,9 +3,9 @@ package com.github.pkovacs.aoc.y2024;
 import java.util.ArrayDeque;
 import java.util.LinkedHashSet;
 
-import com.github.pkovacs.util.data.Cell;
-import com.github.pkovacs.util.data.CharTable;
-import com.github.pkovacs.util.data.Direction;
+import com.github.pkovacs.util.CharTable;
+import com.github.pkovacs.util.Dir;
+import com.github.pkovacs.util.Pos;
 
 public class Day15 extends AbstractDay {
 
@@ -18,14 +18,14 @@ public class Day15 extends AbstractDay {
     }
 
     private static long solve(String input) {
-        var blocks = collectLineBlocks(input);
-        var table = new CharTable(blocks.get(0));
-        var moves = String.join("", blocks.get(1));
+        var sections = collectSections(input);
+        var table = new CharTable(sections.get(0));
+        var moves = String.join("", sections.get(1));
 
         var pos = table.find('@');
         for (var move : moves.toCharArray()) {
             // Collect cells to move (the current position and some boxes)
-            var dir = Direction.fromChar(move);
+            var dir = Dir.fromChar(move);
             var cells = collectCellsToMove(pos, dir, table);
 
             // Move the cells if each of them can be moved
@@ -40,12 +40,12 @@ public class Day15 extends AbstractDay {
 
         return table.cells()
                 .filter(p -> table.get(p) == 'O' || table.get(p) == '[')
-                .mapToLong(p -> p.row() * 100L + p.col()).sum();
+                .mapToLong(p -> p.y * 100L + p.x).sum();
     }
 
-    private static LinkedHashSet<Cell> collectCellsToMove(Cell pos, Direction dir, CharTable table) {
-        var cells = new LinkedHashSet<Cell>();
-        var queue = new ArrayDeque<Cell>();
+    private static LinkedHashSet<Pos> collectCellsToMove(Pos pos, Dir dir, CharTable table) {
+        var cells = new LinkedHashSet<Pos>();
+        var queue = new ArrayDeque<Pos>();
         queue.add(pos);
         while (!queue.isEmpty()) {
             var current = queue.removeFirst();
@@ -54,9 +54,9 @@ public class Day15 extends AbstractDay {
             if (table.get(next) != '.' && table.get(next) != '#') {
                 queue.add(next);
                 if (dir.isVertical() && table.get(next) == '[') {
-                    queue.add(next.neighbor(Direction.EAST));
+                    queue.add(next.neighbor(Dir.E));
                 } else if (dir.isVertical() && table.get(next) == ']') {
-                    queue.add(next.neighbor(Direction.WEST));
+                    queue.add(next.neighbor(Dir.W));
                 }
             }
         }

@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 public class Day09 extends AbstractDay {
 
     public static void main(String[] args) {
-        var input = readFirstLine(getInputPath());
+        var input = readLines(getInputPath()).getFirst();
 
         System.out.println("Part 1: " + solve(input, 1));
         System.out.println("Part 2: " + solve(input, 2));

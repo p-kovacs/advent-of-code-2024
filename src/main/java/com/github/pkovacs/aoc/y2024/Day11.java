@@ -2,7 +2,7 @@ package com.github.pkovacs.aoc.y2024;
 
 import java.util.Arrays;
 
-import com.github.pkovacs.util.data.CounterMap;
+import com.github.pkovacs.util.CounterMap;
 
 public class Day11 extends AbstractDay {
 
@@ -24,8 +24,8 @@ public class Day11 extends AbstractDay {
                 if (k == 0) {
                     next.add(1L, count);
                 } else if (s.length() % 2 == 0) {
-                    next.add(Long.parseLong(s.substring(0, s.length() / 2)), count);
-                    next.add(Long.parseLong(s.substring(s.length() / 2)), count);
+                    next.add(parseLong(s.substring(0, s.length() / 2)), count);
+                    next.add(parseLong(s.substring(s.length() / 2)), count);
                 } else {
                     next.add(k * 2024, count);
                 }

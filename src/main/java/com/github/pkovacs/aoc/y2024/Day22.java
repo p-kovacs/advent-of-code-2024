@@ -9,8 +9,8 @@ public class Day22 extends AbstractDay {
     private static final int BIT_MASK = 16777215;
 
     private static final int RADIX = 19;
-    private static final int RADIX3 = RADIX * RADIX * RADIX;
-    private static final int RADIX4 = RADIX * RADIX * RADIX * RADIX;
+    private static final int RADIX3 = (int) pow(RADIX, 3);
+    private static final int RADIX4 = (int) pow(RADIX, 4);
 
     public static void main(String[] args) {
         var seeds = readInts(getInputPath());

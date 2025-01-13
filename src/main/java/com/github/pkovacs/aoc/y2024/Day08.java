@@ -3,8 +3,8 @@ package com.github.pkovacs.aoc.y2024;
 import java.util.HashSet;
 import java.util.stream.Stream;
 
-import com.github.pkovacs.util.data.Cell;
-import com.github.pkovacs.util.data.CharTable;
+import com.github.pkovacs.util.CharTable;
+import com.github.pkovacs.util.Pos;
 
 public class Day08 extends AbstractDay {
 
@@ -16,7 +16,7 @@ public class Day08 extends AbstractDay {
     }
 
     private static int solve(CharTable table, int part) {
-        var set = new HashSet<Cell>();
+        var set = new HashSet<Pos>();
         table.values().filter(c -> c != '.').distinct().forEach(ch -> {
             var antennas = table.findAll(ch).toList();
             for (var p : antennas) {
@@ -37,7 +37,7 @@ public class Day08 extends AbstractDay {
      * relative primes, so it's enough to iterate the difference between the antennas. It seems to be true for
      * any input file of the puzzle.
      */
-    private static Stream<Cell> antinodes(CharTable table, Cell p, Cell q, int part) {
+    private static Stream<Pos> antinodes(CharTable table, Pos p, Pos q, int part) {
         return part == 1 ? table.ray(p, q).skip(1).limit(1) : table.ray(p, q);
     }
 

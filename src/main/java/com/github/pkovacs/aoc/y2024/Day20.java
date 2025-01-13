@@ -2,9 +2,10 @@ package com.github.pkovacs.aoc.y2024;
 
 import java.util.List;
 
-import com.github.pkovacs.util.alg.Bfs;
-import com.github.pkovacs.util.data.Cell;
-import com.github.pkovacs.util.data.CharTable;
+import com.github.pkovacs.util.Bfs;
+import com.github.pkovacs.util.Box;
+import com.github.pkovacs.util.CharTable;
+import com.github.pkovacs.util.Range;
 
 public class Day20 extends AbstractDay {
 
@@ -20,11 +21,11 @@ public class Day20 extends AbstractDay {
         var start = table.find('S');
         var end = table.find('E');
 
-        var paths = Bfs.run(start, p -> getValidMoves(table, p));
-        var revPaths = Bfs.run(end, p -> getValidMoves(table, p));
+        var paths = Bfs.findPaths(table.graph(c -> c != '#'), start);
+        var revPaths = Bfs.findPaths(table.graph(c -> c != '#'), end);
         long totalDist = paths.get(end).dist();
 
-        var cheats = Cell.box(new Cell(-cheatTime, -cheatTime), new Cell(cheatTime, cheatTime))
+        var cheats = new Box(new Range(-cheatTime, cheatTime), new Range(-cheatTime, cheatTime)).stream()
                 .filter(p -> p.dist1() <= cheatTime).toList();
 
         return paths.keySet().stream().mapToLong(from -> {
@@ -32,16 +33,12 @@ public class Day20 extends AbstractDay {
             // free position reachable from the end, calculate the saved time, and then aggregate the results
             long distFrom = paths.get(from).dist();
             return cheats.stream()
-                    .map(c -> from.add(c.row(), c.col()))
+                    .map(from::plus)
                     .filter(revPaths::containsKey)
                     .mapToLong(to -> totalDist - (distFrom + from.dist1(to) + revPaths.get(to).dist()))
                     .filter(saved -> saved >= 100)
                     .count();
         }).sum();
-    }
-
-    private static List<Cell> getValidMoves(CharTable table, Cell p) {
-        return table.neighbors(p).filter(n -> table.get(n) != '#').toList();
     }
 
 }

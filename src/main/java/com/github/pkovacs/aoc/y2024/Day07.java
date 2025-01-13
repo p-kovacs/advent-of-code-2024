@@ -15,7 +15,7 @@ public class Day07 extends AbstractDay {
     private static long solve(List<String> lines, int part) {
         long result = 0;
         for (var line : lines) {
-            long target = Long.parseLong(line.split(": ")[0]);
+            long target = parseLong(line.split(": ")[0]);
             long[] params = parseLongs(line.split(": ")[1]);
             if (canMatch(target, params, part, 1, params[0])) {
                 result += target;
@@ -38,7 +38,7 @@ public class Day07 extends AbstractDay {
     private static LongStream applyOperations(long a, long b, int part) {
         return part == 1
                 ? LongStream.of(a + b, a * b)
-                : LongStream.of(a + b, a * b, Long.parseLong(String.valueOf(a) + b));
+                : LongStream.of(a + b, a * b, parseLong(String.valueOf(a) + b));
     }
 
 }

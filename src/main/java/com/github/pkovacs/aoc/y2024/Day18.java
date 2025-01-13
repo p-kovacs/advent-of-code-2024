@@ -3,9 +3,9 @@ package com.github.pkovacs.aoc.y2024;
 import java.util.List;
 import java.util.Optional;
 
-import com.github.pkovacs.util.alg.Bfs;
-import com.github.pkovacs.util.alg.Path;
-import com.github.pkovacs.util.data.IntTable;
+import com.github.pkovacs.util.Bfs;
+import com.github.pkovacs.util.IntTable;
+import com.github.pkovacs.util.Path;
 
 public class Day18 extends AbstractDay {
 
@@ -33,8 +33,7 @@ public class Day18 extends AbstractDay {
     }
 
     private static Optional<Long> dist(IntTable table, int time) {
-        return Bfs.findPath(table.topLeft(), p -> table.neighbors(p).filter(n -> table.get(n) >= time).toList(),
-                table.bottomRight()::equals).map(Path::dist);
+        return Bfs.findPath(table.graph(i -> i >= time), table.topLeft(), table.bottomRight()::equals).map(Path::dist);
     }
 
     private static IntTable parseInput(List<String> lines) {

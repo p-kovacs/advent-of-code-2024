@@ -4,8 +4,8 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.pkovacs.util.data.Cell;
-import com.github.pkovacs.util.data.CharTable;
+import com.github.pkovacs.util.CharTable;
+import com.github.pkovacs.util.Pos;
 
 public class Day10 extends AbstractDay {
 
@@ -20,9 +20,9 @@ public class Day10 extends AbstractDay {
         return table.findAll('0').mapToLong(head -> countTrails(table, head, part)).sum();
     }
 
-    private static long countTrails(CharTable table, Cell head, int part) {
-        var trails = new ArrayList<List<Cell>>();
-        var queue = new ArrayDeque<List<Cell>>();
+    private static long countTrails(CharTable table, Pos head, int part) {
+        var trails = new ArrayList<List<Pos>>();
+        var queue = new ArrayDeque<List<Pos>>();
         queue.add(List.of(head));
         while (!queue.isEmpty()) {
             var p = queue.removeFirst();

@@ -2,12 +2,14 @@ package com.github.pkovacs.aoc.y2024;
 
 import java.util.List;
 
+import com.github.pkovacs.util.Pos;
+
 public class Day13 extends AbstractDay {
 
     private static final long SHIFT = 10000000000000L;
 
     public static void main(String[] args) {
-        var machines = readLineBlocks(getInputPath());
+        var machines = readSections(getInputPath());
 
         var ans1 = machines.stream().mapToLong(m -> solveMachine(m, 1)).sum();
         var ans2 = machines.stream().mapToLong(m -> solveMachine(m, 2)).sum();
@@ -34,9 +36,9 @@ public class Day13 extends AbstractDay {
      * {@link ArithmeticException}.
      */
     private static long solveMachine(List<String> lines, int part) {
-        var a = Pos.parse(lines.get(0));
-        var b = Pos.parse(lines.get(1));
-        var t = Pos.parse(lines.get(2));
+        var a = parse(lines.get(0));
+        var b = parse(lines.get(1));
+        var t = parse(lines.get(2));
         if (part == 2) {
             t = new Pos(t.x + SHIFT, t.y + SHIFT);
         }
@@ -47,13 +49,9 @@ public class Day13 extends AbstractDay {
         return (i * a.x + j * b.x == t.x) && (i * a.y + j * b.y == t.y) ? (i * 3 + j) : 0;
     }
 
-    private record Pos(long x, long y) {
-
-        static Pos parse(String line) {
-            var v = parseLongs(line);
-            return new Pos(v[0], v[1]);
-        }
-
+    private static Pos parse(String line) {
+        var v = parseLongs(line);
+        return new Pos(v[0], v[1]);
     }
 
 }

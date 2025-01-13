@@ -9,10 +9,10 @@ import static java.util.stream.Collectors.toSet;
 public class Day05 extends AbstractDay {
 
     public static void main(String[] args) {
-        var blocks = readLineBlocks(getInputPath());
+        var sections = readSections(getInputPath());
 
-        var rules = blocks.get(0).stream().map(s -> new Rule(parseInts(s))).collect(toSet());
-        var updates = blocks.get(1).stream().map(s -> listOf(parseInts(s))).toList();
+        var rules = sections.get(0).stream().map(Rule::parse).collect(toSet());
+        var updates = sections.get(1).stream().map(s -> listOf(parseInts(s))).toList();
 
         long ans1 = 0;
         long ans2 = 0;
@@ -38,7 +38,7 @@ public class Day05 extends AbstractDay {
         var list = new ArrayList<>(up);
         var result = new ArrayList<Integer>();
 
-        // Topological sorting (slow method, but it's fine for this puzzle)
+        // Topological sort (slow method, but it's fine for this puzzle)
         while (!list.isEmpty()) {
             var min = list.stream()
                     .filter(a -> list.stream().noneMatch(b -> rules.contains(new Rule(b, a))))
@@ -51,8 +51,9 @@ public class Day05 extends AbstractDay {
     }
 
     private static record Rule(int a, int b) {
-        Rule(int[] array) {
-            this(array[0], array[1]);
+        static Rule parse(String line) {
+            int[] array = parseInts(line);
+            return new Rule(array[0], array[1]);
         }
     }
 

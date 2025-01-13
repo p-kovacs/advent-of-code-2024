@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import com.github.pkovacs.util.data.CharTable;
+import com.github.pkovacs.util.CharTable;
 
 public class Day21 extends AbstractDay {
 
@@ -22,8 +22,7 @@ public class Day21 extends AbstractDay {
     }
 
     private static long solve(List<String> lines, int level) {
-        return lines.stream()
-                .mapToLong(p -> minLength(p, level) * Long.parseLong(p.substring(0, p.length() - 1))).sum();
+        return lines.stream().mapToLong(p -> minLength(p, level) * parseLong(p.substring(0, p.length() - 1))).sum();
     }
 
     private static long minLength(String path, int level) {
@@ -55,12 +54,12 @@ public class Day21 extends AbstractDay {
         var a = table.find(ch1);
         var b = table.find(ch2);
         var gap = table.find('.');
-        var xPath = (b.x() < a.x() ? "<<<" : ">>>").substring(0, Math.abs(b.x() - a.x()));
-        var yPath = (b.y() < a.y() ? "^^^" : "vvv").substring(0, Math.abs(b.y() - a.y()));
+        var xPath = (b.x < a.x ? "<<<" : ">>>").substring(0, (int) abs(b.x - a.x));
+        var yPath = (b.y < a.y ? "^^^" : "vvv").substring(0, (int) abs(b.y - a.y));
 
         return Stream.of(
-                (gap.x() == b.x() && gap.y() == a.y()) ? null : (xPath + yPath + 'A'),
-                (gap.x() == a.x() && gap.y() == b.y()) ? null : (yPath + xPath + 'A')
+                (gap.x == b.x && gap.y == a.y) ? null : (xPath + yPath + 'A'),
+                (gap.x == a.x && gap.y == b.y) ? null : (yPath + xPath + 'A')
         ).filter(Objects::nonNull).distinct().toList();
     }
 

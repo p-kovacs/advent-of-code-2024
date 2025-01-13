@@ -22,13 +22,13 @@ public class Day24 extends AbstractDay {
      * Solves part 1. Slow method, but it's fine for this puzzle.
      */
     private static long solve1(String input) {
-        var blocks = collectLineBlocks(input);
-        var gates = blocks.get(1).stream().map(Gate::parse).toList();
+        var sections = collectSections(input);
+        var gates = sections.get(1).stream().map(Gate::parse).toList();
 
         var values = new HashMap<String, Integer>();
-        for (var line : blocks.get(0)) {
+        for (var line : sections.get(0)) {
             var parts = line.split(": ");
-            values.put(parts[0], Integer.parseInt(parts[1]));
+            values.put(parts[0], parseInt(parts[1]));
         }
 
         var queue = new ArrayDeque<Gate>();
@@ -71,11 +71,11 @@ public class Day24 extends AbstractDay {
      * only such swaps, which greatly simplifies the code compared to a (more) general method.
      */
     private static String solve2(String input) {
-        var blocks = collectLineBlocks(input);
-        var gates = new ArrayList<>(blocks.get(1).stream().map(Gate::parse).toList());
+        var sections = collectSections(input);
+        var gates = new ArrayList<>(sections.get(1).stream().map(Gate::parse).toList());
 
         var swapped = new ArrayList<String>();
-        for (int i = 1, count = blocks.get(0).size() / 2; i < count; i++) {
+        for (int i = 1, count = sections.get(0).size() / 2; i < count; i++) {
             var x = String.format("x%02d", i);
             var z = String.format("z%02d", i);
             var gate1 = find(gates, Operator.XOR, x).orElseThrow();

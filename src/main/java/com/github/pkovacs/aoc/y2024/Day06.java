@@ -5,9 +5,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-import com.github.pkovacs.util.data.Cell;
-import com.github.pkovacs.util.data.CharTable;
-import com.github.pkovacs.util.data.Direction;
+import com.github.pkovacs.util.CharTable;
+import com.github.pkovacs.util.Dir;
+import com.github.pkovacs.util.Pos;
 
 public class Day06 extends AbstractDay {
 
@@ -26,13 +26,13 @@ public class Day06 extends AbstractDay {
         System.out.println("Part 2: " + ans2);
     }
 
-    private static Map<Cell, State> patrol(CharTable table, Cell start) {
-        var parentMap = new HashMap<Cell, State>();
-        patrol(table, new State(start, Direction.NORTH), parentMap::putIfAbsent);
+    private static Map<Pos, State> patrol(CharTable table, Pos start) {
+        var parentMap = new HashMap<Pos, State>();
+        patrol(table, new State(start, Dir.N), parentMap::putIfAbsent);
         return parentMap;
     }
 
-    private static boolean checkLoop(CharTable table, Cell block, State start) {
+    private static boolean checkLoop(CharTable table, Pos block, State start) {
         table = new CharTable(table);
         table.set(block, '#');
         return patrol(table, start, null);
@@ -47,7 +47,7 @@ public class Day06 extends AbstractDay {
      *
      * @return true if a loop was found
      */
-    private static boolean patrol(CharTable table, State start, BiConsumer<Cell, State> visitor) {
+    private static boolean patrol(CharTable table, State start, BiConsumer<Pos, State> visitor) {
         var pos = start.pos;
         var dir = start.dir;
         State state = null;
@@ -70,6 +70,6 @@ public class Day06 extends AbstractDay {
         return false;
     }
 
-    private record State(Cell pos, Direction dir) {}
+    private record State(Pos pos, Dir dir) {}
 
 }

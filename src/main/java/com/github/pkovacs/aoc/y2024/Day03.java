@@ -1,13 +1,11 @@
 package com.github.pkovacs.aoc.y2024;
 
-import com.github.pkovacs.util.RegexUtils;
-
 public class Day03 extends AbstractDay {
 
     public static void main(String[] args) {
         var input = readString(getInputPath());
 
-        var instructions = RegexUtils.findAll("(mul[(][0-9]{1,3},[0-9]{1,3}[)]|do[(][)]|don't[(][)])", input);
+        var instructions = findAll("(mul[(][0-9]{1,3},[0-9]{1,3}[)]|do[(][)]|don't[(][)])", input);
 
         long ans1 = 0;
         long ans2 = 0;

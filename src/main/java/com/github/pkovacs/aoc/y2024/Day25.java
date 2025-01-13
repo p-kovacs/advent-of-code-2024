@@ -2,14 +2,14 @@ package com.github.pkovacs.aoc.y2024;
 
 import java.util.stream.IntStream;
 
-import com.github.pkovacs.util.data.CharTable;
+import com.github.pkovacs.util.CharTable;
 
 public class Day25 extends AbstractDay {
 
     public static void main(String[] args) {
-        var input = readString(getInputPath());
+        var sections = readSections(getInputPath());
 
-        var tables = collectLineBlocks(input).stream().map(CharTable::new).toList();
+        var tables = sections.stream().map(CharTable::new).toList();
         var locks = tables.stream().filter(t -> t.get(0, 0) == '#').map(Day25::toNumbers).toList();
         var keys = tables.stream().filter(t -> t.get(0, 0) == '.').map(Day25::toNumbers).toList();
 
@@ -20,7 +20,7 @@ public class Day25 extends AbstractDay {
     }
 
     private static int[] toNumbers(CharTable table) {
-        return IntStream.range(0, table.colCount())
+        return IntStream.range(0, table.width())
                 .map(i -> (int) table.colValues(i).filter(c -> c == '#').count() - 1).toArray();
     }
 
